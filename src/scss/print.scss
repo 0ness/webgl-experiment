@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+
+/*============================================================
+印刷用スタイル　
+============================================================*/
+*	{ margin:0; padding:0;}
+img	{ display:block; border:none;}
+#wrapper,
+#layerBG,
+#floatBox,
+#lightBox	{ display:none !important;}
+#print		{ display:block !important;
+
+	img	{ width:100%; height:auto;}
+
+	img#printNormal	{ display:block !important;}
+	img#printMedical	{ display:none !important;}
+
+	//メディカルオノマトペ表示時
+	&.medical	{
+		img#printMedical	{ display:block !important;}
+		img#printNormal	{ display:none !important;}
+	}
+}
+
+
+
+//IE8 + modernBrowser対応
+//floatをtableに代えてレイアウト崩れを減らす
+#contents { display: table;}
+#main { display: table-cell; float: none;}
+#sub { display: table-cell; float: none;}
+#header { display: table;}
+#footer { display: table;}
+
+
+//IE8以上　改ページ設定
+.bforeBreak { page-break-before: always;} //要素直前に改ページ
+.afterBreak { page-break-after: always;} //要素直後に改ページ
+.insideNotBreak { page-break-inside: avoid;} //要素内は改ページさせない

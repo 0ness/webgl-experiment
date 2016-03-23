@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="ja"><!-- InstanceBegin template="/Templates/base.dwt" codeOutsideHTMLIsLocked="true" --><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>three.js particle-test ｜ webGL　example</title><meta name="description" content=""><meta name="keywords" content=""><meta name="viewport" content="width=1080px,user-scalable=yes"><link rel="stylesheet" type="text/css" href="common/css/layout.css"><!-- InstanceBeginEditable name="head" -->
+<style type="text/css">
+	#myCanvas	{ background:black; }
+</style>
+<!-- InstanceEndEditable --><!-- InstanceParam name="ページタイトル" type="text" value="three.js particle-test" --><!-- InstanceParam name="Keyword" type="text" value="" --><!-- InstanceParam name="Description" type="text" value="" --><!-- InstanceParam name="ページid" type="text" value="" --><!-- InstanceParam name="viewport" type="text" value="width=1080px,user-scalable=yes" --></head><body><div id="wrapper"> 		<h1 class="hd-title">three.js particle-test</h1>	<!-- InstanceBeginEditable name="wrapper-last" -->
+	<div id="myCanvas"></div>
+	<!-- InstanceEndEditable --></div><script src="common/js/base.js"></script> <script src="common/js/lib/Planet.js"></script><script src="common/js/develop/perlin.js"></script><script src="common/js/develop/dat.gui.min.js"></script><script src="common/js/develop/stats.min.js"></script> <script src="common/js/module.js"></script> <!-- InstanceBeginEditable name="body-last" -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.js"></script>
+<script src="common/js/lib/Detector.js"></script>
+<script src="common/js/contents/threejs.particle.js"></script>
+<script>
+var p = new Particle({
+	container		:document.getElementById("myCanvas"),
+	particleLength	:600,
+	particleSpd		:0.5,
+	particleColor	:"random",
+	cameraFocus		:0
+});
+	p.loop();
+</script>
+<!-- InstanceEndEditable --> </body><!-- InstanceEnd --></html>

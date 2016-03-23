@@ -1,0 +1,62 @@
+//
+//記述はレイアウトの構造優先
+//-----------------------------
+//1.width,height
+//2.float,clear
+//3.position,top,bottom,left,right
+//4.overflow,display
+//5.margin,padding
+//6.text-align
+//7.font,line-height
+//8.background,border
+//9.etc....
+//-----------------------------
+//
+//フォントサイズ：%表示（20px以降はpxで可）
+
+
+@import "partials/_setting";
+@import "partials/_mixin";
+@import "partials/_function";
+@import "partials/_reset";
+@import "partials/_font";
+
+
+
+/* default style
+--------------------------------------------------------------------*/
+a	{ @include link-set;}
+p   { @include text-base;}
+li  { @include text-base;}
+
+
+
+
+/* developed style
+--------------------------------------------------------------------*/
+a[href = ""] { background: red !important; color:white !important; font-size: x-large !important;}
+
+
+
+
+/* base
+--------------------------------------------------------------------*/
+html	{ height:100%; color: $color-txt; background:$color-bg; overflow: hidden;}
+body	{ height:100%; text-align:left; @include select-color(#fff,$color-key);}
+body > #wrapper { height:auto;}
+#wrapper { min-width:$width; min-height:100%; height:auto !important; overflow: hidden; height:100%; position:relative; background: #111;
+	@include mobile	{ -webkit-text-size-adjust: none;}	
+}
+
+
+
+
+/* module
+--------------------------------------------------------------------*/
+.hd-title 	{ @include top-left(20,20,20); color:white; font-size: 15px; letter-spacing:2px; font-family:helvetica; animation: start 1s ease 1s 1 forwards; opacity: 0;}
+@keyframes start{
+	to { opacity: 1;}
+}
+
+
+

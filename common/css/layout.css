@@ -1,0 +1,63 @@
+@charset "UTF-8";
+/* フォントサイズのリスト */
+/* 相対的なフォントサイズの調整を行う：基本の数値に対して増減した値を指定する @param{Number}px単位で基準となるフォントサイズから何px変わったかを指定
+*/
+/*============================================================
+RESET用スタイル　
+============================================================*/
+/**
+* Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+* http://cssreset.com
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; text-decoration: none; }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+/*============================================================
+FONT用スタイル　
+============================================================*/
+html { font-size: 62.5%; }
+body { font: 13px/1.231 arial,helvetica,clean,sans-serif; *font-size: small; /* for IE */ *font: x-small; /* for IE in quirks mode */ font-family: "游ゴシック", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif; }
+body.webfont { font-family: "Noto Sans Japanese", "游ゴシック", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif; font-weight: 100; }
+select, input, button, textarea { font: 99% arial, helvetica, clean, sans-serif; }
+table { font-size: inherit; font: 100%; }
+pre, code, kbd, samp, tt { font-family: monospace; *font-size: 108%; line-height: 100%; }
+@font-face { font-family: 'icomoon'; src: url("../fonts/icomoon.eot?gr599p"); src: url("../fonts/icomoon.eot?#iefixgr599p") format("embedded-opentype"), url("../fonts/icomoon.woff?gr599p") format("woff"), url("../fonts/icomoon.ttf?gr599p") format("truetype"), url("../fonts/icomoon.svg?gr599p#icomoon") format("svg"); font-weight: normal; font-style: normal; }
+[class^="icoFont"], [class*=" icoFont"] { font-family: 'icomoon'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; /* Better Font Rendering =========== */ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.ico { width: 100%; height: 100%; display: table; text-align: center; }
+.ico { top: 0px; left: 0px; position: absolute; z-index: auto; line-height: 1 !important; }
+.ico:before { line-height: 1 !important; color: #555c5e; display: table-cell; vertical-align: middle; }
+.icoFontArw-up:before { content: "\e800"; }
+.icoFontArw-down:before { content: "\e802"; }
+.icoFontArw-right:before { content: "\e801"; }
+.icoFontArw-left:before { content: "\e803"; }
+/* default style
+--------------------------------------------------------------------*/
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:active { text-decoration: underline; }
+p { font-size: 100%; line-height: 1.8; }
+li { font-size: 100%; line-height: 1.8; }
+/* developed style
+--------------------------------------------------------------------*/
+a[href=""] { background: red !important; color: white !important; font-size: x-large !important; }
+/* base
+--------------------------------------------------------------------*/
+html { height: 100%; color: #555; background: #fff; overflow: hidden; }
+body { height: 100%; text-align: left; }
+body p::selection, body h1::selection, body h2::selection, body h3::selection, body h4::selection, body a::selection, body img::selection, body em::selection, body strong::selection, body dd::selection, body dt::selection, body u::selection, body dfn::selection, body li::selection { color: #fff; background: #0797de; }
+body *::-moz-selection { color: #fff; background: #0797de; }
+body > #wrapper { height: auto; }
+#wrapper { min-width: 1024px; min-height: 100%; height: auto !important; overflow: hidden; height: 100%; position: relative; background: #111; }
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) { #wrapper { -webkit-text-size-adjust: none; } }
+
+/* module
+--------------------------------------------------------------------*/
+.hd-title { top: 20px; left: 20px; position: absolute; z-index: 20; color: white; font-size: 15px; letter-spacing: 2px; font-family: helvetica; animation: start 1s ease 1s 1 forwards; opacity: 0; }
+@keyframes start { to { opacity: 1; } }
+
+/*# sourceMappingURL=layout.css.map */

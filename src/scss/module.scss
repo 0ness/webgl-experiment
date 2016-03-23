@@ -1,0 +1,412 @@
+/*  
+# Container Compornets
+*/
+@import "partials/_setting";
+@import "partials/_mixin";
+@import "partials/_function";
+@import "partials/_reset";
+
+
+/*
+・基本のコンポーネント名とサブクラス名はキャメルケース
+・あくまで拡張元のクラスでもキャメルケースで統一
+・モディファイアはコンポーネントの属性 + - +　スタイル名で表示を差別化
+・ユニークなクラス内の子クラスは、汎用的なスタイルをデフォルトで指定してないクラス名を使用
+・グローバルな拡張クラスは接頭辞に"ex-"を指定する
+*/
+
+
+$marginEM:1.5em;
+$radiusBase:4px;
+
+$easeOut:cubic-bezier(0, .75, .58, 1);
+$easeInOut:cubic-bezier(.4, .01, .23, 1.03);
+$easeOutBack:cubic-bezier(0, .78, .44, 1.19);
+
+
+.blc,
+.section { margin:0 0 60px;
+	&:last-child {margin-bottom: 0;}
+}
+
+
+
+/* 
+
+
+１．タグベース　→　クラスベースに書き換える
+２．モディファイアの考え方を覚える
+３．サブクラスの命名を徹底する
+４．上記の処理にsassの機能を使う
+
+
+サイト　→　ページ　→　コンポーネント　でスコープの範囲を考えて、
+使うアーキテクチャのレベルを考える
+
+
+・コンポーネントの設計
+・枠とコンポーネントの分離　// sub,main,header,footer
+・目的の分離
+・スコープの判断
+・グローバルクラスの使用
+
+
+例：レイアウトを構成する汎用的なモジュール
+
+//見出し、画像、テキストのボックス
+.blcFigure { width:100px; background:red;
+
+	//NG tag selector
+	p,
+	div,
+	ul,
+	ol,
+	li,
+	dl,
+	dt,
+	dd{}
+
+	//ok tag selector
+	a,
+	i,
+	small,
+	em,
+	strong,
+	address,
+	sup,
+	sub{}
+
+	//child module css
+	.blcFigure-text,
+	.blcFigure-link {}
+
+	//child
+	//拡張性と目的のバランス
+	//基本モジュール、専用モジュールの考え方
+	.text,.txt,
+	.paragraph,.prg,
+	.ico,
+	.link {
+		//ブロック要素のプロパティ
+		//インライン要素のプロパティ
+		& > a {}
+	}
+
+	.conatiner {}
+
+	//modefier
+	//ベースclassに追加する為のもの
+	//単独で機能してはいけない
+	//マルチクラス
+	.blcFigure-sidebar { width:30px; }
+	.blcFigure-header { }
+
+	//NG　modefier
+	#sidebar .blcFigure {}
+	#header .blcFigure {}
+
+}
+
+
+//exented
+//拡張クラス、サブクラス
+//例：ベースに対して、並列に並ぶボックス
+//シングルクラス + modefeir
+.blcFigureHalf { @extend .blcFigure;}
+.blcFigureMin { @extend .blcFigure;}
+.blcFigMin {}
+
+
+variable,function,mixin：全レイヤー
+extend：同系統のオブジェクト
+
+
+<div class="blc"></div>
+<div class="blc blc-sidebar"></div>
+
+
+
+//global modefier
+//ex-　+ プロパティ名
+.ex-bdrRadius {}
+.ex-alignLeft {}
+
+
+//js trigger cls,id
+.js-acordion {}
+.js-heightBox{}
+#js-acordion{}
+#js-canvas {}
+
+
+
+*/
+
+
+
+
+
+
+/*  
+# Paragraph Compornets
+*/
+//文章のマージン
+%prgMargin{
+	& + p,
+	& + .prgContainer,
+	& + .prg { margin-top: 1.5em;}
+}
+
+//common
+p,
+li,
+span,
+div{
+	//child
+	& > b { font-weight: bold;}
+	& > em { color: $color-key;}
+	& > strong { color: $color-key; font-weight: bold;}
+	& > small { font-size:fa(-1); padding:5px 0 0; line-height: 1.6; display: inline-block;}
+	& > .prg-bg { color: white; background:$color-key;}
+	& > .prg-bdrSolid { border-bottom: solid $color-txt 1px;}
+	& > .prg-bdrDotted { border-bottom: dotted $color-txt 1px;}
+
+	//modefier
+	&.prg-small {display: block; font-size: fa(-1); padding:5px 0 0; line-height: 1.6; @extend %prgMargin; }
+	&.prg-dropCaps { overflow: hidden; zoom:1;
+		&:first-letter { float: left; line-height: 1; font-size: 330%; padding: 0.25em 0.05em 5px 0;}
+	}
+}
+
+
+
+
+/*  
+# Paragraph Compornets
+*/
+.prgContainer { @include clearfix;
+	//white space
+	@extend %prgMargin;	
+}
+
+
+
+
+/*  
+# Heading Compornets
+####.headMain：見出し要素01
+```
+<p class="headMain">.headMain</p>
+<p class="headMain"><a href="">.headMain</a></p>
+<p class="headMain"><b>.headMain</b></p>
+<p class="headMain headHline">.headMain + .headHline</p>
+<p class="headMain headVline">.headMain + .headVline</p>
+<p class="headMain headVlineRound">.headMain + .headVlineRound</p>
+<p class="headMain headVline headHline">.headMain + .headVline + .headHline</p>
+<p class="headMain head-subSet"><span class="body">.headMain + .head-subSet</span> <span class="sub">.sub</span></p>
+<p class="headMain head-subSet"><span class="body">.headMain + .head-subSet</span> <span class="sub"><a href="">.sub</a></span></p>
+<p class="headMain head-subSet"><span class="body">.headMain + .head-subSet</span> <span class="sub"><a href="">.sub</a><a href="">.sub</a><a href="">.sub</a><a href="">.sub</a><a href="">.sub</a></span></p>
+```
+*/
+
+//common
+.heading { line-height: 1.2;
+	
+	//white space
+	&:last-child {margin-bottom: 0;}
+
+	//child
+	b { font-weight: bold;}
+	& > a { text-decoration: none;}
+	
+	//modefier	
+	&.head-hLine	{ padding: 0 0 5px; border-bottom:1px solid gray;}
+	&.head-vLine 	{ padding: 0 0 0 10px; margin-left:2px; border-left: 4px solid gray;}
+	&.head-vLineRound { padding: 0 0 0 10px; margin-left:2px; position: relative;
+		&:before 	{ content:"　"; @include wh(4,100%); @include top-left(); background:gray; border-radius:4px;}
+	}
+	&.head-bg 	{ padding:6px 8px 5px; background:#eee;}
+	&.head-subSet	{ text-align: right; @include clearfix;
+		.body	{ float: left; text-align: left;}
+		.sub 	{ display:inline-block; text-align: right; vertical-align: middle;
+			a { margin: 0 0 0 15px;}
+		}
+	}	
+}
+
+//subclass
+//大見出し
+.headMain {@extend .heading; margin-bottom:2em; font-size: fs(26);
+	
+	//modefier
+	&.head-subSet{ 
+		.sub { font-size:fa(-5);
+		}
+	}
+}
+//中見出し
+.headSub {@extend .heading; margin-bottom: 1em; font-size:fs(20); font-weight: bold;
+
+	//modefier
+	&.head-subSet{
+		.sub { font-size:fa(-4);}
+	}
+	
+}
+//小見出し
+.headSub-02 {@extend .heading; margin-bottom:0.5em; font-size: fs(17);
+
+	//modefier
+	&.head-arrow { padding-left: 20px; position: relative;
+		&:before { content:"▶"; @include wh(4,100%); @include top-left(50%,0); margin-top: -9px; color:gray; font-size:fa(-1);}
+	}
+	&.head-subSet{
+		.sub { font-size:fa(-2);}
+	}
+	
+}
+
+
+
+/*  
+# List Compornets
+*/
+.listContainer { margin:0 0 2em;
+	
+	//white space
+	&:last-child { margin-bottom: 0;}
+	
+	//child
+	li,
+	.listItem {line-height: 1.6;
+		.btn { display: block; padding: 5px 8px; color: white; background:$color-key; text-decoration:none;
+			&:hover { background:lighten($color-key,15%);}
+		}
+	}
+	
+	//modefier
+	&.list-outside {
+		li,
+		.listItem  { padding-left:1em;
+			&:first-letter { margin-left:-1em;}
+		}
+	}
+	&.list-marker {
+		li,
+		.listItem { list-style: inside disc; zoom:1;}
+	}
+	&.list-figure {
+		li,
+		.listItem { margin: 0 10px 10px 0;
+			&:last-child { margin-right: 0;}
+		}
+		img { display: block;}
+	}
+}
+
+//subclass
+.listVertical { @extend .listContainer;
+	
+	//child
+	li,
+	.listItem{ 
+		& + .listItem,
+		& + li {margin-top:0.4em;}
+	}
+	.listVertical { margin-left:2em;}
+	
+}
+
+.listHorizon { @extend .listContainer; @include clearfix;
+	li,
+	.listItem { display: block; float: left; margin-right:15px;}
+}
+
+
+
+
+/* 
+# Figure Compornets
+*/
+
+.figContainer { display: block; padding:4px 0 0 0; margin: 0 12px 1em 0;
+	img  { display: block;}
+	.cap { display: block; padding:0.5em 0 0; font-size: fa(-1); line-height: 1.5;}
+	&:last-child { margin-bottom: 0;}
+		
+	//modifier
+	&.fig-alignLeft {float: left;}
+	&.fig-alignRight {float: right; margin-right: 0; margin-left: 12px;}	
+}
+.fig-bdrSolid {
+	img {border: 10px solid #f3f3f3;}
+}
+.fig-bdrDashed {
+	img { padding: 8px; border: 2px dashed #ccc;}
+}
+.fig-shadow { padding-right: 4px; padding-left: 4px;
+	img { border: 10px solid #fff; box-shadow: 0 2px 5px #ddd;}
+}
+
+
+/* 
+# UI compornents
+*/
+
+//Pagenation
+.pagenation { @include clearfix;
+	
+	//child
+	.link { display: inline-block; margin: 0 10px 0 0;
+		&:last-child { margin: 0;}		
+	}
+	%linkBtn {
+		a { padding: 2px 4px; background:$color-key; color: #fff; text-decoration: none; }
+	}
+	.linkPrev,
+	.linkNext { @extend %linkBtn;}
+
+}
+
+
+/* 
+# Responsive Style compornents
+*/
+
+//fluid Img & fluid Block
+.re-fluidElm { @include fluidElm;}
+
+//fluid Block
+.re-fluidBlc {
+	img { @include fluidElm;}
+}
+.re-fluidBlc-2 { @include fluidBlc;}
+.re-fluidBlc-3 { @include fluidBlc(3);}
+.re-fluidBlc-4 { @include fluidBlc(4);}
+.re-fluidBlc-5 { @include fluidBlc(5);}
+
+
+
+
+
+
+/*
+# Design Interface Compornets
+####.box-column-2：メインカラム内の2ブロック
+```
+<span class="lineBlc-01 linkSkin-01"></span>
+```
+*/
+
+.lineBlc-01 { @include wh(100%,4); background: #ccc;}
+.linkSkin-01 { background:url(../images/pettern/dot_01.gif) left top red;}
+
+
+
+.themeCompornentList { padding: 0 20px;
+	#contents { padding-bottom:100px;}
+//	.blc {
+//		& + .blc { margin-top:80px;}
+//	}
+}
+.headCompornet { padding: 0 0 2px; margin-bottom:40px; border-bottom:2px dashed #ddd; letter-spacing: 1px;}

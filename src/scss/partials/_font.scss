@@ -1,0 +1,60 @@
+
+//-------------------------------------//
+// font Classes
+//-------------------------------------//
+
+
+//webフォント設定
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?gr599p');
+	src:url('../fonts/icomoon.eot?#iefixgr599p') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?gr599p') format('woff'),
+		url('../fonts/icomoon.ttf?gr599p') format('truetype'),
+		url('../fonts/icomoon.svg?gr599p#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icoFont"], [class*=" icoFont"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+//placeholder
+%ico-before { @include top-left(); line-height: 1 !important;}
+%ico-font 	{ width: 100%; height: 100%; display: table; text-align: center;}
+%ico-center {
+	&:before { width: 13px; display: block; margin: -0.5em auto 0 -0.5em; @include top-left(50%,50%);}
+}
+
+.ico	{ @include top-left(); line-height: 1 !important; @extend  %ico-font;
+	&:before { line-height: 1 !important; color:#555c5e; display: table-cell; vertical-align: middle;}
+}
+
+.icoFontArw-up:before 			{content: "\e800";}
+.icoFontArw-down:before 		{content: "\e802";}
+.icoFontArw-right:before 		{content: "\e801";}
+.icoFontArw-left:before 		{content: "\e803";}
+
+//.icoFontArwCircle-left:before 	{content: "\e903";}
+//.icoFontArwCircle-down:before 	{content: "\e902";}
+//.icoFontArwCircle-right:before	{content: "\e901";}
+//.icoFontArwCircle-up:before 	{content: "\e900";}
+
+//.icoFont-gimmick:before 		{content: "\e610";}
+//.icoFontLink:before 			{content: "\e611";}
+//.icoFontClose-circle:before 	{content: "\e601";}
+//.icoFontClose:before 			{content: "\e602";}
+//.icoFontGuide:before 			{content: "\e603";}
+//.icoFontMenu:before 			{content: "\e604"; font-size:10px;}
+//.icoFontFacebook:before 		{content: "\e606"; font-size:13px;}
+//.icoFontTwitter:before 			{content: "\e605"; font-size:11px;}

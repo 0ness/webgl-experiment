@@ -1,0 +1,77 @@
+// SETTING　各プロジェクト毎の仕様に対応する変数・MIXIN・関数を記述
+
+
+
+
+// Vairable プロジェクト用　///////////////////////////////////////
+
+//サイトの幅
+$width:1024px;
+
+//サイトの高さ
+$min-height:600px;
+
+
+
+
+//font family
+$fontGothic:"游ゴシック",YuGothic,"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+$fontMincyou:"游明朝",YuMincho,"ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro","ＭＳ Ｐ明朝", "MS PMincho", serif;
+
+// color
+$color-key:#0797de;
+$color-txt:#555;
+$color-link:#008cda;
+$color-link-over:#09c;
+$color-link-active:#09c;
+$color-bg:#fff;
+$color-bg-content:#fdfdfd;
+
+// Spaces
+$space-base: 10px;
+$space-2: $space-base * 2;
+$space-3: $space-base * 3;
+$space-4: $space-base * 5;
+
+// Font Size
+$fs-base: 13px;
+$fs-min-1: $fs-base - 1px;
+$fs-min-2: $fs-base - 2px;
+$fs-min-3: $fs-base - 3px;
+$fs-max-1: $fs-base + 1px;
+$fs-max-2: $fs-base + 2px;
+$fs-max-3: $fs-base + 4px;
+$fs-max-4: $fs-base + 6px;
+$fs-max-5: $fs-base + 8px;
+$fs-max-6: $fs-base + 16px;
+
+//transition timing
+$trans-style:linear 0.1s;
+$trans-style-short:ease 0.08s;
+$trans-style-middle:ease 0.18s;
+$trans-style-long:ease 0.35s;
+
+$trans-fade:opacity ease 0.2s;
+
+
+
+
+// MIXIN プロジェクト用　///////////////////////////////////////
+
+//基本のテキストスタイル 引数(font-size , line-height , color , letter-spacing)
+//ベースの変更は引数の値で指定しておく
+//基本使用する時は引数を使わないイメージで 例：@include text-base;
+@mixin text-base($size:100%,$lh:1.8) { font-size:$size; line-height:$lh;};
+@mixin text-link		{ text-decoration:none;}
+@mixin text-hover		{ text-decoration:underline;}
+@mixin text-active		{ text-decoration:underline;}
+
+//通常のリンクテキストの指定
+@mixin link-set		{
+	@include text-link;
+	&:hover	{ @include text-hover;}
+	&:active{ @include text-active;}
+}
+
+
+
